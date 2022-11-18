@@ -14,7 +14,7 @@ class MenuActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnRfid.setOnClickListener {
-            var intent_rfid = Intent(this,RfidActivity::class.java)
+            var intent_rfid = Intent(this,RfidinputActivity::class.java)
             startActivity(intent_rfid)
 
         }
