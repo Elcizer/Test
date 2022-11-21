@@ -4,50 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MenuActivity">
+    tools:context=".RfidinputmenuActivity">
 
-    <android.widget.Button
-        android:id="@+id/btn_record"
-        android:layout_width="300dp"
+    <TextView
+        android:id="@+id/tv_rfidnum"
+        android:layout_width="200dp"
         android:layout_height="75dp"
-        android:background="@drawable/btn_round_edge"
+        android:layout_marginTop="96dp"
         android:fontFamily="@font/pretendard_bold"
-        android:text="복용 내역 확인"
-        android:textColor="#FFFFFF"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_pill"
+        android:text="@string/rfid_abc"
+        android:textColor="#000000"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_rfid" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.widget.Button
-        android:id="@+id/btn_pill"
+        android:id="@+id/btn_infosetting"
         android:layout_width="300dp"
         android:layout_height="75dp"
-        android:layout_marginBottom="150dp"
         android:background="@drawable/btn_round_edge"
         android:fontFamily="@font/pretendard_bold"
-        android:text="알약 개수 설정"
+        android:text="@string/qweqwe"
+        android:textColor="#FFFFFF"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_pillsetting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_register" />
+
+    <android.widget.Button
+        android:id="@+id/btn_register"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/btn_round_edge"
+        android:fontFamily="@font/pretendard_bold"
+        android:text="@string/reg"
+        android:textColor="#FFFFFF"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_rfidnum" />
+
+    <android.widget.Button
+        android:id="@+id/btn_pillsetting"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="171dp"
+        android:background="@drawable/btn_round_edge"
+        android:fontFamily="@font/pretendard_bold"
+        android:text="@string/qweqweqwe"
         android:textColor="#FFFFFF"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <android.widget.Button
-        android:id="@+id/btn_rfid"
-        android:layout_width="300dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/btn_round_edge"
-        android:fontFamily="@font/pretendard_bold"
-        android:text="RFID 등록"
-        android:textColor="#FFFFFF"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.082" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

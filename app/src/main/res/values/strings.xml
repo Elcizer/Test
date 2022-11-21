@@ -2,4 +2,11 @@
     <string name="app_name">Tablet_dispenser</string>
     <string name="rfid_number">RFID NUMBER</string>
     <string name="rfid">RFID 번호를 입력하세요</string>
+    <string name="infosetting">정보 변경</string>
+    <string name="num">num</string>
+    <string name="rfid_abc">RFID :</string>
+    <string name="pillsetting">알약 설정</string>
+    <string name="qweqwe">정보 변경</string>
+    <string name="qweqweqwe">알약 설정</string>
+    <string name="reg">정보 등록</string>
 </resources>

@@ -16,7 +16,7 @@ class DatabaseHelper private constructor(context: Context) :SQLiteOpenHelper(con
         const val TABLE_NAME = "pill"
         const val COL1_ID = "_id"
         const val COL2_NAME = "name"
-        const val COL3_AGE = "age"
+        const val COL3_BIRTHDAY = "birthday"
         const val COL4_P1 = "p1"
         const val COL5_P2 = "p2"
         const val COL6_P3 = "p3"
@@ -36,7 +36,7 @@ class DatabaseHelper private constructor(context: Context) :SQLiteOpenHelper(con
         val createQuery = "CREATE TABLE $TABLE_NAME ("+
                 "$COL1_ID INTEGER, "+
                 "$COL2_NAME TEXT, "+
-                "$COL3_AGE INTEGER, "+
+                "$COL3_BIRTHDAY INTEGER, "+
                 "$COL4_P1 INTEGER, "+
                 "$COL5_P2 INTEGER, "+
                 "$COL6_P3 INTEGER "+
@@ -54,13 +54,13 @@ class DatabaseHelper private constructor(context: Context) :SQLiteOpenHelper(con
         }
     }
 
-    fun insertUserData(id:String,name:String,age:String)
+    fun insertUserData(id:String,name:String,birthday:String)
     {
         val db = this.writableDatabase
         val contentValues = ContentValues().apply{
             put(COL1_ID,id)
             put(COL2_NAME,name)
-            put(COL3_AGE,age)
+            put(COL3_BIRTHDAY,birthday)
         }
         db.insert(TABLE_NAME,null,contentValues)
     }
@@ -83,10 +83,10 @@ class DatabaseHelper private constructor(context: Context) :SQLiteOpenHelper(con
         val stringBuffer = StringBuffer()
         val cursor= db.rawQuery("SELECT FROM $TABLE_NAME WHERE ID=$id",null)
         val name = cursor.getString(1)
-        val age = cursor.getString(2)
+        val birthday = cursor.getString(2)
         result = stringBuffer.toString()
         cursor.close()
-        return Pair<String,String>(name,age)
+        return Pair<String,String>(name,birthday)
     }
 
     fun readPillData(id:String) : Triple<Int,Int,Int>{ // id를 받고 textview에 알약 개수를 반환
