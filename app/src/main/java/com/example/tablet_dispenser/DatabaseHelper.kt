@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.os.Build.ID
+import android.widget.Toast
 import java.nio.IntBuffer
 
 class DatabaseHelper private constructor(context: Context) :SQLiteOpenHelper(context, DATABASE_NAME,null,
@@ -109,5 +110,26 @@ class DatabaseHelper private constructor(context: Context) :SQLiteOpenHelper(con
         val p3 = cursor.getInt(5)
         cursor.close()
         return Triple(p1,p2,p3) // 리턴값 알약 개수 세 개
+    }
+
+    fun checkDataExists(rfid:Int) : Boolean{
+        val db =this.writableDatabase
+        var cursor = db.rawQuery("SELECT $COL2_RFID FROM $TABLE_NAME ",null)
+        if(cursor.moveToFirst()) { //값이 있다면
+            while(true) {
+                if (cursor.getInt(0).equals(rfid)) // 값이 rfid와 같다면
+                {
+                    return false
+                    break
+                }
+                if (!cursor.moveToNext()) // 다음 열이 없다면
+                {
+                    return true
+                    break
+                }
+            }
+
+        }
+        return true
     }
 }

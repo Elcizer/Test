@@ -17,6 +17,7 @@ class RfidinputActivity : AppCompatActivity() {
             var intent = Intent(this,RfidinputmenuActivity::class.java)
             Myapplication.pref.setRfid("rfid",Integer.parseInt(binding.etNum.text.toString()))
             startActivity(intent)
+            finish()
         } // RFID 숫자를 입력하고 그 integer형 숫자를 SharedPreference에 저장
     }
     /*private fun savedata() {

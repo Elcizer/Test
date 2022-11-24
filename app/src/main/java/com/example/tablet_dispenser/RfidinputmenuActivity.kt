@@ -3,9 +3,14 @@ package com.example.tablet_dispenser
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.example.tablet_dispenser.databinding.ActivityRfidinputmenuBinding
 
 class RfidinputmenuActivity : AppCompatActivity() {
+
+    private val dbHelper: DatabaseHelper by lazy {
+        DatabaseHelper.getInstance(applicationContext)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
 
 
@@ -24,8 +29,14 @@ class RfidinputmenuActivity : AppCompatActivity() {
 
 
         binding.btnRegister.setOnClickListener {
-            startActivity(intent_register)
-            finish()
+            if(dbHelper.checkDataExists(rfid)){
+                startActivity(intent_register)
+                finish()
+            }
+            else
+            {
+                Toast.makeText(this,"이미 등록된 RFID 입니다. 정보 변경을 이용해주세요.",Toast.LENGTH_LONG)
+            }
         }
         binding.btnInfosetting.setOnClickListener {
             startActivity(intent_info)
@@ -33,7 +44,6 @@ class RfidinputmenuActivity : AppCompatActivity() {
         }
         binding.btnPillsetting.setOnClickListener {
             startActivity(intent_pill)
-            finish()
         }
     }
 }

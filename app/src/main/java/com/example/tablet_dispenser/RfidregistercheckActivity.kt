@@ -20,8 +20,11 @@ class RfidregistercheckActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rfidregistercheck)
         setContentView(binding.root)
+
         binding.tvRfidnum.text = "RFID : $rfid"
+
         var user : Pair<String,String> = dbHelper.readUserData(rfid)
+
         binding.tvNameCheck.text = user.first
         binding.tvBirthdayCheck.text = user.second
         binding.btnCheckFinish.setOnClickListener {
