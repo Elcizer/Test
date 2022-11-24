@@ -5,26 +5,24 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.tablet_dispenser.databinding.ActivityMainBinding
+import com.example.tablet_dispenser.databinding.ActivityRfidinputBinding
 import com.example.tablet_dispenser.databinding.ActivityRfidregisterBinding
 import com.example.tablet_dispenser.databinding.ActivityRfidregistercheckBinding
 
 class RfidregisterActivity : AppCompatActivity() {
+    private val binding :ActivityRfidregisterBinding by lazy{
+        ActivityRfidregisterBinding.inflate(layoutInflater)
+    }
 
     private val dbHelper: DatabaseHelper by lazy {
         DatabaseHelper.getInstance(applicationContext)
     }
-    var rfid = intent.getIntExtra("rfid_register",0)
+    var rfid = Myapplication.pref.getRfid("rfid",0)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        var binding = ActivityRfidregisterBinding.inflate(layoutInflater)
-
-        binding.tvRfidnum.text = "RFID : $rfid"
-
-        setContentView(R.layout.activity_rfidregister)
         setContentView(binding.root)
-
-
+        binding.tvRfidnum.text = "RFID: $rfid"
+        insertInfo()
     }
     override fun onDestroy() {
         dbHelper.close()
@@ -33,13 +31,11 @@ class RfidregisterActivity : AppCompatActivity() {
 
     private fun insertInfo()
     {
-        var binding = ActivityRfidregisterBinding.inflate(layoutInflater)
         binding.btnRegisterCheck.setOnClickListener {
-            var intent_check = Intent(this,ActivityRfidregistercheckBinding::class.java)
-            intent_check.getIntExtra("check_rfid",rfid)
+            var intent_check = Intent(this,RfidregistercheckActivity::class.java)
             try{
-                dbHelper.insertUserData(
-                    rfid.toString().trim(),
+                dbHelper.RegisterData(
+                    rfid,
                     binding.etName.text.toString().trim(),
                     binding.etBirthday.text.toString().trim()
                 )
@@ -47,7 +43,7 @@ class RfidregisterActivity : AppCompatActivity() {
             catch(e:Exception){
                 e.printStackTrace()
             }
-            startActivity(intent)
+            startActivity(intent_check)
             finish()
         }
 

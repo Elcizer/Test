@@ -7,18 +7,21 @@ import com.example.tablet_dispenser.databinding.ActivityRfidinputmenuBinding
 
 class RfidinputmenuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
         var binding = ActivityRfidinputmenuBinding.inflate(layoutInflater)
+
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        var rfid = intent.getIntExtra("rfid_num",0)
-        binding.tvRfidnum.text = "RFID : $rfid"
+
+        var rfid = Myapplication.pref.getRfid("rfid",0)
+        binding.tvRfidnum.setText("RFID: $rfid")
+
 
         var intent_register = Intent(this,RfidregisterActivity::class.java)
         var intent_info = Intent(this,RfidinfosettingActivity::class.java)
         var intent_pill = Intent(this,RfidpillsettingActivity::class.java)
-        intent_register.putExtra("rfid_register",rfid)
-        intent_info.putExtra("rfid_info",rfid)
-        intent_pill.putExtra("rfid_pill",rfid)
+
 
         binding.btnRegister.setOnClickListener {
             startActivity(intent_register)

@@ -15,12 +15,13 @@ class RfidregistercheckActivity : AppCompatActivity() {
     private val dbHelper: DatabaseHelper by lazy {
         DatabaseHelper.getInstance(applicationContext)
     }
+    var rfid = Myapplication.pref.getRfid("rfid",0)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rfidregistercheck)
         setContentView(binding.root)
-        var rfid = intent.getIntExtra("rfid_check",0)
-        var user : Pair<String,String> = dbHelper.readUserData(rfid.toString())
+        binding.tvRfidnum.text = "RFID : $rfid"
+        var user : Pair<String,String> = dbHelper.readUserData(rfid)
         binding.tvNameCheck.text = user.first
         binding.tvBirthdayCheck.text = user.second
         binding.btnCheckFinish.setOnClickListener {

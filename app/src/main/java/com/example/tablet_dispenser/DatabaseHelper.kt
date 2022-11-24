@@ -15,11 +15,12 @@ class DatabaseHelper private constructor(context: Context) :SQLiteOpenHelper(con
         const val DATABASE_VERSION = 1
         const val TABLE_NAME = "pill"
         const val COL1_ID = "_id"
-        const val COL2_NAME = "name"
-        const val COL3_BIRTHDAY = "birthday"
-        const val COL4_P1 = "p1"
-        const val COL5_P2 = "p2"
-        const val COL6_P3 = "p3"
+        const val COL2_RFID = "rfid"
+        const val COL3_NAME = "name"
+        const val COL4_BIRTHDAY = "birthday"
+        const val COL5_P1 = "p1"
+        const val COL6_P2 = "p2"
+        const val COL7_P3 = "p3"
 
         @Volatile
         private var instance : DatabaseHelper? = null
@@ -34,14 +35,14 @@ class DatabaseHelper private constructor(context: Context) :SQLiteOpenHelper(con
 
     override fun onCreate(db: SQLiteDatabase?) {
         val createQuery = "CREATE TABLE $TABLE_NAME ("+
-                "$COL1_ID INTEGER, "+
-                "$COL2_NAME TEXT, "+
-                "$COL3_BIRTHDAY INTEGER, "+
-                "$COL4_P1 INTEGER, "+
-                "$COL5_P2 INTEGER, "+
-                "$COL6_P3 INTEGER "+
+                "$COL1_ID INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                "$COL2_RFID INTEGER, " +
+                "$COL3_NAME TEXT, "+
+                "$COL4_BIRTHDAY TEXT, "+
+                "$COL5_P1 INTEGER, "+
+                "$COL6_P2 INTEGER, "+
+                "$COL7_P3 INTEGER"+
                 ")"
-
         db?.execSQL(createQuery)
 
     }
@@ -53,45 +54,56 @@ class DatabaseHelper private constructor(context: Context) :SQLiteOpenHelper(con
             onCreate(db)
         }
     }
-
-    fun insertUserData(id:String,name:String,birthday:String)
+    fun RegisterData(rfid:Int,name:String,birthday:String)
     {
         val db = this.writableDatabase
         val contentValues = ContentValues().apply{
-            put(COL1_ID,id)
-            put(COL2_NAME,name)
-            put(COL3_BIRTHDAY,birthday)
+            put(COL2_RFID,rfid)
+            put(COL3_NAME,name)
+            put(COL4_BIRTHDAY,birthday)
+            put(COL5_P1,0)
+            put(COL6_P2,0)
+            put(COL7_P3,0)
         }
         db.insert(TABLE_NAME,null,contentValues)
     }
 
-    fun insertPillData(id:String,p1:String,p2:String,p3:String)
+    fun insertUserData(rfid:Int,name:String,birthday:String)
     {
         val db = this.writableDatabase
         val contentValues = ContentValues().apply{
-            put(COL1_ID,id)
-            put(COL4_P1,p1)
-            put(COL5_P2,p2)
-            put(COL6_P3,p3)
+            put(COL2_RFID,rfid)
+            put(COL3_NAME,name)
+            put(COL4_BIRTHDAY,birthday)
         }
-        db.update(TABLE_NAME,contentValues,"$COL1_ID = ?",arrayOf(id))
+        db.insert(TABLE_NAME,null,contentValues)
     }
 
-    fun readUserData(id:String): Pair<String,String>{ // id를 받고 textview에 이름과 나이를 반환
-        var result : String
+    fun insertPillData(rfid:Int,p1:String,p2:String,p3:String)
+    {
         val db = this.writableDatabase
-        val stringBuffer = StringBuffer()
-        val cursor= db.rawQuery("SELECT FROM $TABLE_NAME WHERE ID=$id",null)
-        val name = cursor.getString(1)
-        val birthday = cursor.getString(2)
-        result = stringBuffer.toString()
+        val contentValues = ContentValues().apply{
+            put(COL2_RFID,rfid)
+            put(COL5_P1,p1)
+            put(COL6_P2,p2)
+            put(COL7_P3,p3)
+        }
+        db.update(TABLE_NAME,contentValues,"$COL1_ID = ?",arrayOf(rfid.toString()))
+    }
+
+    fun readUserData(rfid:Int): Pair<String,String>{ // id를 받고 textview에 이름과 나이를 반환
+        val db = this.writableDatabase
+        val cursor= db.rawQuery("SELECT * FROM $TABLE_NAME WHERE $COL2_RFID=$rfid",null)
+        cursor.moveToFirst()
+        val name = cursor.getString(2)
+        val birthday = cursor.getString(3)
         cursor.close()
         return Pair<String,String>(name,birthday)
     }
 
-    fun readPillData(id:String) : Triple<Int,Int,Int>{ // id를 받고 textview에 알약 개수를 반환
+    fun readPillData(rfid:Int) : Triple<Int,Int,Int>{ // id를 받고 textview에 알약 개수를 반환
         val db = this.writableDatabase
-        val cursor= db.rawQuery("SELECT FROM $TABLE_NAME WHERE ID=$id",null)
+        val cursor= db.rawQuery("SELECT FROM $TABLE_NAME WHERE $COL2_RFID=$rfid",null)
         val p1 = cursor.getInt(3)
         val p2 = cursor.getInt(4)
         val p3 = cursor.getInt(5)
