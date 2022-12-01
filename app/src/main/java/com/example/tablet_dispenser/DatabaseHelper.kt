@@ -42,7 +42,7 @@ class DatabaseHelper private constructor(context: Context) :SQLiteOpenHelper(con
                 "$COL4_BIRTHDAY TEXT, "+
                 "$COL5_P1 INTEGER, "+
                 "$COL6_P2 INTEGER, "+
-                "$COL7_P3 INTEGER"+
+                "$COL7_P3 INTEGER "+
                 ")"
         db?.execSQL(createQuery)
 
@@ -69,7 +69,7 @@ class DatabaseHelper private constructor(context: Context) :SQLiteOpenHelper(con
         db.insert(TABLE_NAME,null,contentValues)
     }
 
-    fun insertUserData(rfid:Int,name:String,birthday:String)
+    fun changeUserData(rfid:Int,name:String,birthday:String)
     {
         val db = this.writableDatabase
         val contentValues = ContentValues().apply{
@@ -77,10 +77,10 @@ class DatabaseHelper private constructor(context: Context) :SQLiteOpenHelper(con
             put(COL3_NAME,name)
             put(COL4_BIRTHDAY,birthday)
         }
-        db.insert(TABLE_NAME,null,contentValues)
+        db.update(TABLE_NAME,contentValues,"$COL2_RFID = ?",null)
     }
 
-    fun insertPillData(rfid:Int,p1:String,p2:String,p3:String)
+    fun changePillData(rfid:Int,p1:String,p2:String,p3:String)
     {
         val db = this.writableDatabase
         val contentValues = ContentValues().apply{
@@ -89,9 +89,8 @@ class DatabaseHelper private constructor(context: Context) :SQLiteOpenHelper(con
             put(COL6_P2,p2)
             put(COL7_P3,p3)
         }
-        db.update(TABLE_NAME,contentValues,"$COL1_ID = ?",arrayOf(rfid.toString()))
+        db.update(TABLE_NAME,contentValues,"$COL2_RFID = ?",null)
     }
-
     fun readUserData(rfid:Int): Pair<String,String>{ // id를 받고 textview에 이름과 나이를 반환
         val db = this.writableDatabase
         val cursor= db.rawQuery("SELECT * FROM $TABLE_NAME WHERE $COL2_RFID=$rfid",null)
@@ -114,22 +113,14 @@ class DatabaseHelper private constructor(context: Context) :SQLiteOpenHelper(con
 
     fun checkDataExists(rfid:Int) : Boolean{
         val db =this.writableDatabase
-        var cursor = db.rawQuery("SELECT $COL2_RFID FROM $TABLE_NAME ",null)
-        if(cursor.moveToFirst()) { //값이 있다면
-            while(true) {
-                if (cursor.getInt(0).equals(rfid)) // 값이 rfid와 같다면
-                {
-                    return false
-                    break
-                }
-                if (!cursor.moveToNext()) // 다음 열이 없다면
-                {
-                    return true
-                    break
-                }
-            }
-
+        val cursor = db.rawQuery("SELECT $COL2_RFID FROM $TABLE_NAME WHERE $COL2_RFID= $rfid",null)
+        if(cursor.moveToFirst())
+        {
+            return true//데이터 존재함
         }
-        return true
+        else
+        {
+            return false // 데이터 없음
+        }
+        }
     }
-}

@@ -30,12 +30,11 @@ class RfidinputmenuActivity : AppCompatActivity() {
 
         binding.btnRegister.setOnClickListener {
             if(dbHelper.checkDataExists(rfid)){
-                startActivity(intent_register)
-                finish()
+                Toast.makeText(this,"이미 등록된 RFID 입니다. 정보 변경을 이용해주세요.",Toast.LENGTH_SHORT).show()
             }
             else
             {
-                Toast.makeText(this,"이미 등록된 RFID 입니다. 정보 변경을 이용해주세요.",Toast.LENGTH_LONG)
+                startActivity(intent_register)
             }
         }
         binding.btnInfosetting.setOnClickListener {
