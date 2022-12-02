@@ -24,12 +24,12 @@
         android:id="@+id/btn_infosetting"
         android:layout_width="300dp"
         android:layout_height="75dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/btn_round_edge"
         android:fontFamily="@font/pretendard_bold"
         android:text="@string/qweqwe"
         android:textColor="#FFFFFF"
         android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_pillsetting"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,15 +54,30 @@
         android:id="@+id/btn_pillsetting"
         android:layout_width="300dp"
         android:layout_height="75dp"
-        android:layout_marginBottom="171dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/btn_round_edge"
         android:fontFamily="@font/pretendard_bold"
         android:text="@string/qweqweqwe"
         android:textColor="#FFFFFF"
         android:textSize="40sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_infosetting" />
+
+    <android.widget.Button
+        android:id="@+id/btn_checkdata"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/btn_round_edge"
+        android:fontFamily="@font/pretendard_bold"
+        android:text="@string/qwreegrwe"
+        android:textColor="#FFFFFF"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_pillsetting" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
