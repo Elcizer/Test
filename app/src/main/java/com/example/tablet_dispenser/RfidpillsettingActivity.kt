@@ -28,7 +28,6 @@ class RfidpillsettingActivity : AppCompatActivity() {
     fun changepillnum()
     {
         binding.btnPillnumberChange.setOnClickListener{
-            // 여기에 intent 값 넣어야함
             try{
                 dbHelper.changePillData(
                     rfid,

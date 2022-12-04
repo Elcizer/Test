@@ -29,7 +29,7 @@ class rfidcheckdataActivity : AppCompatActivity() {
 
         binding.tvRfidnum2.setText("RFID: $rfid")
         binding.tvInquireName.setText("이름: $name")
-        binding.tvInquireBirthday.setText("생일: $birthday")
+        binding.tvInquireBirthday.setText("생년월일: $birthday")
         binding.tvInquireP1.setText("P1: $p1")
         binding.tvInquireP2.setText("P2: $p2")
         binding.tvInquireP3.setText("P3: $p3")

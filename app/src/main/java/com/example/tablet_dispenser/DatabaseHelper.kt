@@ -69,14 +69,15 @@ class DatabaseHelper private constructor(context: Context) :SQLiteOpenHelper(con
         db.insert(TABLE_NAME,null,contentValues)
     }
 
-    fun changeUserData(name:String,birthday:String)
+    fun changeUserData(rfid: Int,name:String,birthday:String)
     {
+        val rfid_string = rfid.toString()
         val db = this.writableDatabase
         val contentValues = ContentValues().apply{
             put(COL3_NAME,name)
             put(COL4_BIRTHDAY,birthday)
         }
-        db.update(TABLE_NAME,contentValues,"$COL2_RFID = ?",null)
+        db.update(TABLE_NAME,contentValues,"$COL2_RFID = ?",arrayOf(rfid_string))
     }
 
     fun changePillData(rfid:Int, p1:Int,p2:Int,p3:Int)
