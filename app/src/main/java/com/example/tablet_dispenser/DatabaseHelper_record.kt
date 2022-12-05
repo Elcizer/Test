@@ -1,5 +1,6 @@
 package com.example.tablet_dispenser
 
+import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
@@ -42,6 +43,28 @@ class DatabaseHelper_record private constructor(context: Context) : SQLiteOpenHe
             db?.execSQL("DROP TABLE IF EXISTS ${DatabaseHelper_record.TABLE_NAME}")
             onCreate(db)
         }
+    }
+
+    fun registerRecord(rfid:Int,date:String)
+    {
+        val rfid_string = rfid.toString()
+        val new_seq = record_num(rfid)
+        val db = this.writableDatabase
+        val contentValues = ContentValues().apply{
+            put(COL1_RFID,rfid_string)
+            put(COL2_SEQ,new_seq)
+            put(COL3_DATE,date)
+        }
+        db.insert(TABLE_NAME,null,contentValues)
+    }
+
+    fun record_num(rfid:Int) : Int {
+        val rfid_string = rfid.toString()
+        val db = this.writableDatabase
+        val cursor = db.rawQuery("SELECT $COL2_SEQ FROM $TABLE_NAME WHERE $COL1_RFID=$rfid_string ORDER BY DESC",null)
+        val seq = cursor.getInt(0)
+        cursor.close()
+        return seq
     }
 }
 

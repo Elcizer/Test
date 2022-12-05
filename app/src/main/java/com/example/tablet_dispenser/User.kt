@@ -1,7 +1,0 @@
-package com.example.tablet_dispenser
-
-//클래스 모델 객체
-class User(val profile: Int,val name: String,val age: String)
-{
-
-}
