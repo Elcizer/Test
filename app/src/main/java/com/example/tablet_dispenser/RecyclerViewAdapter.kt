@@ -1,35 +1,34 @@
 package com.example.tablet_dispenser
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.example.tablet_dispenser.databinding.ActivityRecordBinding
 import com.example.tablet_dispenser.databinding.ListItemRecordBinding
 
-class RecyclerViewAdapter(private val dataset:ArrayList<List<String>>): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>()
+class RecyclerViewAdapter(private val dataset:ArrayList<Pair<String,String>>) : RecyclerView.Adapter<RecyclerViewAdapter.CustomViewHolder>()
 {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-    val binding = ListItemRecordBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        return ViewHolder(binding)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(dataset[position])
+    override fun onCreateViewHolder(parent:ViewGroup,viewType:Int):RecyclerViewAdapter.CustomViewHolder{
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_record,parent,false)
+        return CustomViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-       return dataset.size
+        return dataset.size
     }
 
-    class ViewHolder(private val binding:ListItemRecordBinding) : RecyclerView.ViewHolder(binding.root)
+    override fun onBindViewHolder(holder: RecyclerViewAdapter.CustomViewHolder, position:Int)
     {
-        fun bind(data:List<String>) {
-            binding.tvDate.text = data[0]
-            binding.tvSeq.text = data[1]
-        }
-
-
+        holder.seq.setText(dataset[position].component1())
+        holder.date.setText(dataset[position].component2())
     }
 
+    class CustomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+        val date = itemView.findViewById<TextView>(R.id.tv_date)
+        val seq = itemView.findViewById<TextView>(R.id.tv_seq)
+
+    }
 }

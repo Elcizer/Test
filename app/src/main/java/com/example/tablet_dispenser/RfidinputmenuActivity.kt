@@ -26,7 +26,6 @@ class RfidinputmenuActivity : AppCompatActivity() {
         var intent_register = Intent(this,RfidregisterActivity::class.java)
         var intent_info = Intent(this,RfidinfosettingActivity::class.java)
         var intent_pill = Intent(this,RfidpillsettingActivity::class.java)
-        var intent_datacheck = Intent(this,rfidcheckdataActivity::class.java)
 
         binding.btnRegister.setOnClickListener {
             if(dbHelper.checkDataExists(rfid)){
@@ -46,9 +45,6 @@ class RfidinputmenuActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.btnCheckdata.setOnClickListener {
-            startActivity(intent_datacheck)
-            finish()
-        }
+
     }
 }

@@ -10,4 +10,5 @@
     <string name="qweqweqwe">알약 설정</string>
     <string name="reg">정보 등록</string>
     <string name="qwreegrwe">정보 확인</string>
+    <string name="RfidRecognize">RFID 태그</string>
 </resources>

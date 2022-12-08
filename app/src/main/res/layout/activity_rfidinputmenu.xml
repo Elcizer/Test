@@ -39,10 +39,25 @@
         android:id="@+id/btn_register"
         android:layout_width="300dp"
         android:layout_height="75dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/btn_round_edge"
         android:fontFamily="@font/pretendard_bold"
         android:text="@string/reg"
+        android:textColor="#FFFFFF"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_rfid_recognize" />
+
+    <android.widget.Button
+        android:id="@+id/btn_rfid_recognize"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/btn_round_edge"
+        android:fontFamily="@font/pretendard_bold"
+        android:text="@string/RfidRecognize"
         android:textColor="#FFFFFF"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,20 +79,5 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_infosetting" />
-
-    <android.widget.Button
-        android:id="@+id/btn_checkdata"
-        android:layout_width="300dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/btn_round_edge"
-        android:fontFamily="@font/pretendard_bold"
-        android:text="@string/qwreegrwe"
-        android:textColor="#FFFFFF"
-        android:textSize="40sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_pillsetting" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,16 +7,25 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.example.tablet_dispenser.databinding.ActivityMenuBinding
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class MenuActivity : AppCompatActivity() {
+
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
+        var rfid = Myapplication.pref.getRfid("rfid",0)
 
         var binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val dbHelper_record : DatabaseHelper_record by lazy {
+            DatabaseHelper_record.getInstance(applicationContext)
+        }
 
         binding.btnRfid.setOnClickListener {
             var intent_rfid = Intent(this,RfidinputActivity::class.java)
@@ -25,17 +34,23 @@ class MenuActivity : AppCompatActivity() {
         }
         binding.btnRecord.setOnClickListener {
             var intent_record = Intent(this,RecordActivity::class.java)
-        //startActivity(intent_record)
+            startActivity(intent_record)
             var message = Myapplication.pref.getDate(2,2)
             Toast.makeText(applicationContext,message,Toast.LENGTH_LONG).show()
 
         }
         binding.btnPill.setOnClickListener {
             var intent_pill = Intent(this,PillActivity::class.java)
-            Myapplication.pref.setDate(2,2) //여기에 DatabaseHelper 를 바꿨으니까 이제 여기서도 바꿔야함
-            //                                                                    index 업데이트 하는거 업데이트 했으니까
-            //                                                                     내일의 내가 알아서 해~
-        //startActivity(intent_pill)
+            var now = LocalDateTime.now()
+            val formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분 ")
+            var Strnow = now.format(formatter)
+            dbHelper_record.registerRecord(rfid,Strnow)
+        }
+
+        binding.btnCheckdata.setOnClickListener {
+            var intent_datacheck = Intent(this,rfidcheckdataActivity::class.java)
+            startActivity(intent_datacheck)
+            finish()
         }
 
     }
