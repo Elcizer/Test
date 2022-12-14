@@ -8,14 +8,14 @@ import com.example.tablet_dispenser.databinding.ActivityRfidinputmenuBinding
 
 class RfidinputmenuActivity : AppCompatActivity() {
 
+    val binding : ActivityRfidinputmenuBinding by lazy{
+        ActivityRfidinputmenuBinding.inflate(layoutInflater)
+    }
+
     private val dbHelper: DatabaseHelper by lazy {
         DatabaseHelper.getInstance(applicationContext)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
-        var binding = ActivityRfidinputmenuBinding.inflate(layoutInflater)
-
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
@@ -26,6 +26,7 @@ class RfidinputmenuActivity : AppCompatActivity() {
         var intent_register = Intent(this,RfidregisterActivity::class.java)
         var intent_info = Intent(this,RfidinfosettingActivity::class.java)
         var intent_pill = Intent(this,RfidpillsettingActivity::class.java)
+        var intent_recognize = Intent(this,RfidbtActivity::class.java)
 
         binding.btnRegister.setOnClickListener {
             if(dbHelper.checkDataExists(rfid)){
@@ -44,7 +45,14 @@ class RfidinputmenuActivity : AppCompatActivity() {
             startActivity(intent_pill)
             finish()
         }
-
-
+        binding.btnRfidRecognize.setOnClickListener {
+            startActivity(intent_recognize)
+            finish()
+        }
+    }
+    override fun onRestart() {
+        super.onRestart()
+        var rfid = Myapplication.pref.getRfid("rfid",0)
+        binding.tvRfidnum.text = "RFID: $rfid"
     }
 }

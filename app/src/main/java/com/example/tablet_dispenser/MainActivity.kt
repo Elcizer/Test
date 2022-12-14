@@ -8,7 +8,7 @@ import com.example.tablet_dispenser.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var binding = ActivityMainBinding.inflate(layoutInflater)
+        var binding = com.example.tablet_dispenser.databinding.ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.btnStart.setOnClickListener {

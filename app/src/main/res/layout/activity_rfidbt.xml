@@ -4,13 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PillActivity">
+    tools:context=".RfidbtActivity">
 
     <android.widget.Button
-        android:id="@+id/btn_connect_pill"
+        android:id="@+id/btn_bt_out"
         android:layout_width="300dp"
         android:layout_height="75dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="350dp"
+        android:background="@drawable/btn_round_edge"
+        android:fontFamily="@font/pretendard_bold"
+        android:text="확인"
+        android:textColor="#FFFFFF"
+        android:visibility="gone"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_connect" />
+
+    <TextView
+        android:id="@+id/tv_bt_rfid"
+        android:layout_width="350dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="200dp"
+        android:fontFamily="@font/pretendard_bold"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_connect" />
+
+    <TextView
+        android:id="@+id/tv_bt_ok"
+        android:layout_width="350dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/pretendard_bold"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_connect" />
+
+    <android.widget.Button
+        android:id="@+id/btn_connect"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="110dp"
         android:background="@drawable/btn_round_edge"
         android:fontFamily="@font/pretendard_bold"
         android:text="연결"
@@ -21,34 +63,4 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_bt_ok2"
-        android:layout_width="350dp"
-        android:layout_height="110dp"
-        android:layout_marginTop="100dp"
-        android:fontFamily="@font/pretendard_bold"
-        android:gravity="center"
-        android:textColor="#000000"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_connect_pill" />
-
-    <android.widget.Button
-        android:id="@+id/btn_bt_out2"
-        android:layout_width="300dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="350dp"
-        android:background="@drawable/btn_round_edge"
-        android:fontFamily="@font/pretendard_bold"
-        android:text="확인"
-        android:visibility="gone"
-        android:textColor="#FFFFFF"
-        android:textSize="40sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_connect_pill" />
 </androidx.constraintlayout.widget.ConstraintLayout>
